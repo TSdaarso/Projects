@@ -1,0 +1,11 @@
+version: '3'
+services:
+  tomcat:
+    container_name: tomcat-container
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      password: init0224
+      username: CONTENTMAN
+      url: jdbc:as400://eulenpre.eulen.com;naming=system;errors=full;metadata source=0;"

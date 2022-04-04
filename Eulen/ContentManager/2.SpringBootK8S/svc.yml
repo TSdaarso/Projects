@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contentmanager-deployment
+  labels:
+    app: tomcat-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-dev
+  template:
+    metadata:
+      labels:
+        app: tomcat-dev
+    spec:
+      containers:
+      - name: tomcat-contentmanager
+        image: eulen-tomcat-contentmanager
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: db_password
+          value: init0224
+        - name: db_username
+          value: CONTENTMAN
+        - name: db_url
+          value: jdbc:as400://eulenpre.eulen.com;naming=system;errors=full;metadata source=0;"
+        - name: APP_WAR_NAME
+          value: contentmanager.war
+        - name: APP_CONTEXT_PATH
+          value: contentmanager
+        - name: ldap_urls
+          value: ldap://eulen.ms:389/
+        - name: ldap_username
+          value: adminCManager
+        - name: ldap_password
+          value: Temporal.00
+        - name: webservices_path
+          value: https://preaks.eulen.com/eulen-rest/version
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: contentmanager-service
+  labels:
+    app: tomcat-dev
+spec:
+  type: NodePort
+  selector:
+    app: tomcat-dev
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

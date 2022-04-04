@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  tomcat:
+    container_name: tomcat-service
+    build: .
+    ports:
+      - 8080:8080
+    #volumes:
+    #  - ./data/webapps/:/usr/local/tomcat/webapps
+    #networks:
+    #  - tomcat-net
+    #environment:
+    #  password: init0224
+    #  username: CONTENTMAN
+    #  url: jdbc:as400://eulenpre.eulen.com;naming=system;errors=full;metadata source=0;"
+#volumes:
+#  data:
+#networks:
+#  tomcat-net:

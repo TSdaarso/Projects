@@ -1,0 +1,6 @@
+kubectl exec <pod name> -- curl http://localhost:8080/contentmanager/api/service/dummy/tomcatTest
+kubectl exec <pod name> -- curl http://localhost:8080/contentmanager/api/service/dummy/healthcheck
+kubectl exec <pod name> -- curl http://localhost:8080/contentmanager/api/service/dummy/version
+---
+minikube service --url  contentmanager-service
+http://<IP>:<NodePort>/contentmanager/api/service/dummy/tomcatTest
